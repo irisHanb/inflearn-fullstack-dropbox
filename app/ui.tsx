@@ -16,7 +16,7 @@ export default function UI() {
         setSearchInput={sestSearchInput}
       />
       <FileDragdraopZone />
-      <DropboxImgList />
+      <DropboxImgList searchInput={searchInput} />
     </main>
   );
 }

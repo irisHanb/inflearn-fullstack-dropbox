@@ -1,21 +1,39 @@
+import { Spinner } from "@material-tailwind/react";
 import { IconButton } from "@material-tailwind/react";
-import React from "react";
+import { useMutation } from "@tanstack/react-query";
+import { deleteFile } from "actions/storageActions";
+import { queryClient } from "config/ReactQueryClientProvider";
+import { getImageUrl } from "utils/supabase/storage";
 
-export default function DropboxImg() {
+export default function DropboxImg({ image }) {
+  const { name } = image;
+  const deleteFileMutation = useMutation({
+    mutationFn: deleteFile,
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["images"],
+      });
+    },
+  });
+
   return (
     <div className="relative w-full flex flex-col gap-2 p-4 border border-gray-100 rounded-2xl shadow-md">
-      {/* Image */}
-      <div>
+      <div className="">
         <img
-          src="/images/cutedog.jpeg"
-          className="w-full aspect-square rounded-2xl"
+          src={getImageUrl(name)}
+          className="w-full rounded-2xl aspect-square"
         />
       </div>
-      {/* FileName  */}
-      <div>cutedog.jpeg</div>
-      <IconButton color="red" className="absolute top-4 right-4">
-        <i className="fas fa-trash" />
-      </IconButton>
+      <div>{name}</div>
+      <div className="absolute top-4 right-4">
+        <IconButton color="red" onClick={() => deleteFileMutation.mutate(name)}>
+          {deleteFileMutation.isPending ? (
+            <Spinner />
+          ) : (
+            <i className="fas fa-trash" />
+          )}
+        </IconButton>
+      </div>
     </div>
   );
 }
