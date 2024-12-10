@@ -2,9 +2,11 @@
 
 ## tech
 
-- supabse
-- nextjs
-- typescript
-- recoil
-- react query
-- tailwind
+- [supabse](https://supabase.com/)
+- [nextjs](https://nextjs.org/)
+- [typescript](https://www.typescriptlang.org/)
+- [recoil](https://recoiljs.org/ko/)
+- [react-query](https://tanstack.com/query/latest)
+- [tailwind](https://tailwindcss.com/)
+- [material tailwind react](https://www.material-tailwind.com/docs/react/guide/next)
+- [react-dropzone](https://www.npmjs.com/package/react-dropzone)
