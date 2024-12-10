@@ -2,7 +2,7 @@
 
 ## tech
 
-- [supabse](https://supabase.com/)
+- [supabase](https://supabase.com/)
 - [nextjs](https://nextjs.org/)
 - [typescript](https://www.typescriptlang.org/)
 - [recoil](https://recoiljs.org/ko/)
