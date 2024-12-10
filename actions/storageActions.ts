@@ -13,14 +13,17 @@ function handleError(error) {
 
 export async function uploadFile(formData: FormData) {
   const supabase = await createServerSupabaseClient();
-  const file = formData.get("file") as File;
 
-  const { data, error } = await supabase.storage
-    .from(bucket)
-    .upload(file.name, file, { upsert: true });
+  const files = Array.from(formData.entries()).map(
+    ([name, file]) => file as File
+  );
 
-  handleError(error);
-  return data;
+  const results = await Promise.all(
+    files.map((file) =>
+      supabase.storage.from(bucket).upload(file.name, file, { upsert: true })
+    )
+  );
+  return results;
 }
 
 export async function searchFiles(search: string = "") {
